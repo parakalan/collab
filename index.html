@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Collab</title>
+	<style type="text/css" media="screen">
+		body {
+			overflow: hidden;
+		}
+		
+		#editor { 
+			position: absolute;
+			width: 50%;
+			height: 100%;
+			font-size: 1.2em;
+		}
+		
+		#editor_remote {
+			margin-left: 50%;
+			position: absolute;
+			width: 50%;
+			height: 100%;
+			font-size: 1.2em;
+		}
+
+		#collab_details {
+			text-align: center;
+		}
+	</style>
+	<link href="css/form.css" rel="stylesheet"/>
+	<link href="css/nav.css" rel="stylesheet"/>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+<div class="_container">  
+	<form id="contact" action="return false;">
+		<h3>Collab</h3>
+		<h4>Collaborate on code with your friend</h4>
+		<fieldset>
+			<input id="user_name" placeholder="Your name" type="text" tabindex="1" required autofocus>
+		</fieldset>
+		<fieldset>
+			<input id="collab_name" placeholder="Collab Name" type="text" tabindex="2" onkeyup="check()" required>
+		</fieldset>
+		<fieldset id="info" style="display: none; font-weight: bold;"></fieldset>
+		<fieldset>
+			<button name="submit" id="submit" type="submit" id="contact-submit" data-submit="...Sending" onclick="setup();return false;">Create or Join</button>
+		</fieldset>
+
+	</form>
+</div>
+<div class="main">
+	<nav class="navbar navbar-inverse">
+		<div class="container-fluid">
+			<ul class="nav navbar-nav navbar-left">
+				<li><select class="selectpicker" data-style="btn-primary" id="languages" onchange="setLanguage()"></select></li>
+			</ul>
+			<!--<ul class="nav navbar-nav navbar-right">
+				<li><select id="collabs"><option></option></select></li>
+			</ul>-->
+		</div>
+	</nav>
+	<div style="width: 100">
+		<div>
+			<pre id="editor"></pre>
+			<pre id="editor_remote"></pre>
+		</div>
+	</div>
+</div>
+
+
+<script src="src/ace.js"></script>
+<script src="src/ext-language_tools.js"></script>
+<script src="scripts/view.js"></script>
+<script src="scripts/script.js"></script>
+<script>
+	populateLangs();
+</script>
+</body>
+</html>
