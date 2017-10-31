@@ -24,6 +24,7 @@ class ClientSocket(websocket.WebSocketHandler):
     """
         Handles WebSocket connection.
     """
+
     def __initialize__(self, user_name, collab_name):
         """
             Initializes a socket object from user name and collab name.
@@ -81,10 +82,12 @@ class ClientSocket(websocket.WebSocketHandler):
         return 'Socket_ID:' + str(self.socket_id) + \
             ',CollabName:' + self.collab_name + ',User_name:' + self.user_name
 
+
 class CheckCollab(BaseHandler):
     """
         Check if collab exists.
     """
+
     def post(self, *args, **kwargs):
         collab_name = self.get_argument('collab_name', None)
         collab_check = any(user for user in GLOBALS[
@@ -99,6 +102,7 @@ class CheckSessionOpen(BaseHandler):
     """
         Check if user has an open session already.
     """
+
     def post(self, *args, **kwargs):
         user_name = self.get_argument('user_name', None)
         collab_name = self.get_argument('collab_name', None)
@@ -116,16 +120,21 @@ class ListCollaborators(BaseHandler):
     """
         List all collaborators in a collab.
     """
+
     def post(self, *args, **kwargs):
         user_name = self.get_argument('user_name', None)
         collab_name = self.get_argument('collab_name', None)
-        collabs = [socket for socket in GLOBALS[
-            'sockets'] if socket.collab_name == collab_name and socket.user_name != user_name]
+        collabs = [socket for socket in GLOBALS['sockets']
+                   if
+                   socket.collab_name == collab_name
+                   and
+                   socket.user_name != user_name]
 
         data = {
             'collabs': collabs
         }
         self.write(tornado.escape.json_encode(data))
+
 
 application = tornado.web.Application([
     (r"/", MainHandler),
